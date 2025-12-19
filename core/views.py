@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import JobListing
-from .scrapers import scrape_timesjobs, scrape_careerindia
+from .scrapers import scrape_guru, scrape_guru_featured
 
 def home(request):
     jobs = None
@@ -13,8 +13,8 @@ def home(request):
         # 2. Run Scrapers
         # Note: In a real production app, this should be a Celery task (Async).
         # For this interview test, running it synchronously is acceptable.
-        data_1 = scrape_timesjobs(designation, location)
-        data_2 = scrape_careerindia(designation, location)
+        data_1 = scrape_guru(designation, location)
+        data_2 = scrape_guru_featured(designation, location)
         
         all_scraped_jobs = data_1 + data_2
         
